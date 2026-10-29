@@ -20,7 +20,9 @@ FROM node:20.11-slim
 # Refresh Debian security updates inherited from the pinned Node base image.
 RUN apt-get update \
     && apt-get upgrade -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+              /usr/local/lib/node_modules/npm \
+              /usr/local/lib/node_modules/corepack
 
 WORKDIR /app
 
