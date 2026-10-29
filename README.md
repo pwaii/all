@@ -1,13 +1,11 @@
 # Docker Workshop — Completed Solution
 
-In this workshop, You'll **containerize a Node.js + Express
-web app backed by Postgres**, orchestrate it with **docker-compose**, and wire
-up a **GitHub Actions CI pipeline** that builds your image, scans it with
-**Trivy** (Image Scanning tools), and pushes it to **Docker Hub**.
-
-The app code under `app/` is **complete**. Your job is to fill in the
-`#TODO(...)` markers in the infrastructure files. Every TODO maps to a
-checklist item in the Self-Verification section below — tick them off as you go.
+This repository contains the completed Docker workshop: a Node.js + Express web
+app backed by Postgres, a multi-stage Docker build, Docker Compose configuration,
+and a GitHub Actions pipeline that scans the image with Trivy and publishes it
+to Docker Hub. The walkthrough below explains the implementation and how to
+verify it. The workflow requires the `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN`
+repository secrets.
 
 ---
 
@@ -47,7 +45,8 @@ Open `app/src/index.js`. Notice the three routes:
 - `GET /health` → 200 if it can reach Postgres, 503 otherwise (the Dockerfile HEALTHCHECK hits this)
 - `GET /tasks` → list from the `tasks` table, seeded by `app/db/init.sql`
 
-You will **not** modify any file under `app/`.
+The application source remains unchanged. Its package manifest pins the patched
+`proxy-addr` 2.0.8 dependency required for a clean critical-vulnerability scan.
 
 ### Step 3 — `.dockerignore`
 
