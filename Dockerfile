@@ -17,6 +17,11 @@ COPY app/ ./
 # =============================================================================
 FROM node:20.11-slim
 
+# Refresh Debian security updates inherited from the pinned Node base image.
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY --from=builder /app /app
